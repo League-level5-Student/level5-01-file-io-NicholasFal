@@ -24,7 +24,7 @@ public class IntroToFileIO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		System.out.println("done");
 		//Read from a file one line at a time
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("src/_00_Intro_To_File_Input_and_Output/test.txt"));
@@ -46,7 +46,7 @@ public class IntroToFileIO {
 
 		//Write to a file
 		try {
-			FileWriter fw = new FileWriter("src/_00_Intro_To_File_Input_and_Output/test2.txt");
+			FileWriter fw = new FileWriter("src/_00_Intro_To_File_Input_and_Output/test2.txt", true);
 			
 			/*
 			NOTE: To append to a file that already exists, add true as a second parameter when calling the
