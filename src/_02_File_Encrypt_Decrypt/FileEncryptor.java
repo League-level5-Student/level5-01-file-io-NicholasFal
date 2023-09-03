@@ -27,7 +27,7 @@ public class FileEncryptor {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Enter String:");
-		String normalText = scan.next();
+		String normalText = scan.nextLine();
 		Scanner scanTwo = new Scanner(System.in);
 		System.out.println("Enter the shifting key:");
 		Integer key = scan.nextInt();
@@ -43,7 +43,9 @@ public class FileEncryptor {
 	public static String encryptor(String str, int key) {
 		String newStr = "";
 		for(int i = 0; i < str.length(); i++) {
-			if( ((str.charAt(i) + key) >= 123-key)  ) {
+			if(str.charAt(i) == ' ') {
+				newStr+=" ";
+			} else if( ((str.charAt(i) ) >= 123-key)  ) {
 			newStr+= (char) (str.charAt(i) - 26 + key);
 			} else {
 				newStr+=(char) (str.charAt(i) + key);
