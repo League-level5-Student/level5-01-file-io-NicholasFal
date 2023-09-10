@@ -54,3 +54,4 @@ public class FileEncryptor {
 		return newStr;
 	}
 }
+//Copyright © 2019 Nicholas Falstad

@@ -2,6 +2,10 @@ package _03_To_Do_List;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -64,9 +68,29 @@ public class ToDoList implements ActionListener{
 		save.setText("Save List");
 		save.addActionListener(this);
 		load.setText("Load List");
+		load.addActionListener(this);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
+		String loadedFile = "";
+		try {
+			FileReader fr = new FileReader("src/_03_To_Do_List/list.txt");
+			int c = fr.read();
+			while(c != -1) {
+				loadedFile+=((char) c);
+				c = fr.read();
+			}
+			fr.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		String[] splits = loadedFile.split(", ");
+		for(int i = 0; i < splits.length; i++) {
+			list.add(splits[i]);
+		}
 	}
 
 	@Override
@@ -83,11 +107,43 @@ public class ToDoList implements ActionListener{
 			}
 			JOptionPane.showMessageDialog(null, str);
 		} else if(arg0.getSource() == remove) {
-			JOptionPane.showInputDialog("Enter a task to remove:");
+			String task = JOptionPane.showInputDialog("Enter a task to remove:");
+			for(int i = 0; i < list.size(); i++) {
+				if(list.get(i).equalsIgnoreCase(task)) {
+					list.remove(i);
+				}
+			}
 		} else if(arg0.getSource() == save) {
-			
+			String str = "";
+			for(String task : list) {
+				str+=task;
+				str+=", ";
+			}
+			try {
+				FileWriter fw = new FileWriter("src/_03_To_Do_List/list.txt", true);
+				fw.write(str);
+				fw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} else if(arg0.getSource() == load) {
-			
+			String location = JOptionPane.showInputDialog("Location of File: ");
+			String loadedFile = "";
+			try {
+				FileReader fr = new FileReader(location);
+				int c = fr.read();
+				while(c != -1) {
+					loadedFile+=((char) c);
+					c = fr.read();
+				}
+				fr.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+			JOptionPane.showMessageDialog(null, "The file has loaded: " + loadedFile);
 		}
 	}
 }

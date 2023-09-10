@@ -62,3 +62,4 @@ public class FileDecryptor {
 		
 	}
 }
+//Copyright © 2019 Nicholas Falstad

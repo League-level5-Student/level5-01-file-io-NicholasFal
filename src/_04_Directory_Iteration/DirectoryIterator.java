@@ -1,6 +1,8 @@
 package _04_Directory_Iteration;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JFileChooser;
 
@@ -19,6 +21,16 @@ public class DirectoryIterator {
 			if(files != null) {
 				for(File f : files) {
 				  System.out.println(f.getAbsolutePath());
+				  if(f.getName().contains(".java")) {
+					  try {
+						FileWriter fw = new FileWriter(f, true);
+						fw.write("//Copyright © 2019 Nicholas Falstad");
+						fw.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				  }
 				}
 			}
 		}
@@ -29,5 +41,7 @@ public class DirectoryIterator {
 		 * Be aware of possible directories inside of directories.
 		 * (e.g //Copyright © 2019 FirstName LastName)
 		 */
+
 	}
 }
+//Copyright © 2019 Nicholas Falstad
